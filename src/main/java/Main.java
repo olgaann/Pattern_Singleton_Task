@@ -1,38 +1,33 @@
 import java.util.*;
 
 public class Main {
+    static Logger logger = Logger.getInstance();
+    static Scanner scan = new Scanner(System.in);
+
+    public static int input(String msg) {
+        int result;
+        while (true) {
+            System.out.println(msg);
+            String input = scan.nextLine();
+            try {
+                result = Integer.parseInt(input);
+                break;
+            } catch (NumberFormatException exception) {
+                logger.log("Неверный формат ввода");
+            }
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
-        Logger logger = Logger.getInstance();
-        Scanner scan = new Scanner(System.in);
+
         Random random = new Random();
 
         logger.log("Запускаем программу");
         logger.log("Просим пользователя ввести входные данные для списка");
 
-        String input;
-        int n;
-        while (true) {
-            System.out.println("Введите размер списка: ");
-            input = scan.nextLine();
-            try {
-                n = Integer.parseInt(input);
-                break;
-            } catch (NumberFormatException exception) {
-                logger.log("Неверный формат ввода");
-            }
-        }
-
-        int m;
-        while (true) {
-            System.out.println("Введите верхнюю границу для значений: ");
-            input = scan.nextLine();
-            try {
-                m = Integer.parseInt(input);
-                break;
-            } catch (NumberFormatException exception) {
-                logger.log("Неверный формат ввода");
-            }
-        }
+        int n = input("Введите размер списка: ");
+        int m = input("Введите верхнюю границу для значений: ");
 
 
         logger.log("Создаем и наполняем список");
@@ -44,17 +39,7 @@ public class Main {
         System.out.println("Вот случайный список " + randomList);
         logger.log("Просим пользователя ввести входные данные для фильтрации");
 
-        int f;
-        while (true) {
-            System.out.println("Введите порог для фильтра: ");
-            input = scan.nextLine();
-            try {
-                f = Integer.parseInt(input);
-                break;
-            } catch (NumberFormatException exception) {
-                logger.log("Неверный формат ввода");
-            }
-        }
+        int f = input("Введите порог для фильтра: ");
 
         logger.log("Запускаем фильтрацию");
         Filter filter = new Filter(f);
